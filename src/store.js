@@ -10,7 +10,7 @@ export default new Vuex.Store({
     toys: [],
     filterBy: {
       name: '',
-      stockStatus: true,
+      inStock: null,
       toyType: 'all',
       sort: {
         sortBy: 'name',
@@ -33,18 +33,22 @@ export default new Vuex.Store({
     },
 
     toyTypes(state) {
-      const typesMap = state.toys.reduce((acc, toy) => {
+      if (state.toys) {
+        const typesMap = state.toys.reduce((acc, toy) => {
           if (!acc[toy.type]) acc[toy.type] = 0;
           return acc;
       }, {})
 
       return Object.keys(typesMap);
+      }
+
+      return [];
     }
   },
 
   mutations: {
-    setToys(state, {toys}) {
-      state.toys = toys;
+    setToys(state, {filteredToys}) {
+      state.toys = filteredToys;
     },
 
     updateToy(state, {updatedToy}) {
@@ -69,8 +73,8 @@ export default new Vuex.Store({
   actions: {
     loadToys(context) {
       ToyService.query()
-      .then(toys => {
-        context.commit({type: 'setToys', toys})
+      .then(filteredToys => {
+        context.commit({type: 'setToys', filteredToys})
       })
     },
 
@@ -107,7 +111,6 @@ export default new Vuex.Store({
       .then((filteredToys) => {
         context.commit({type: 'setToys', filteredToys})
       })
-
     }
   },
 });

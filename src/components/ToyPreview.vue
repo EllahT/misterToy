@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li :class="classByStock">
       <h1>{{toy.name}}</h1>
       <h4>{{toy.price | formatPrice}}</h4>
       <div class="actions">
@@ -27,6 +27,10 @@ export default {
 
     detailsUrl() {
       return `/toy/${this.toy._id}`;
+    },
+
+    classByStock() {
+      return (this.toy.inStock)? 'inStock': 'notInStock';
     }
   },
 
@@ -47,9 +51,16 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
-    background-color: lightblue;
     border-radius: 5px;
     max-width: max-content;
+  }
+
+  li.inStock {
+    background-color: lightblue;
+  }
+
+  li.notInStock {
+    background-color: lightcoral;
   }
 
   li h1 {

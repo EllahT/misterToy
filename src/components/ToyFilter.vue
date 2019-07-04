@@ -7,7 +7,7 @@
           {{type}}
         </option>
       </select>
-      <select @change="emitFilter" v-model="filterBy.stockStatus">
+      <select @change="emitFilter" v-model="filterBy.inStock">
         <option value=true>In Stock</option>
         <option value=false>Not In Stock</option>
       </select>
@@ -35,7 +35,7 @@ export default {
     return {
       filterBy: {
       name: '',
-      stockStatus: true,
+      inStock: null,
       toyType: 'all',
       sort: {
         sortBy: 'name',

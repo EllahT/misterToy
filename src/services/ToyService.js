@@ -1,4 +1,5 @@
 import axios from 'axios';
+import UtilService from './UtilService.js';
 
 export default {
     getById,
@@ -11,8 +12,16 @@ export default {
 function query(filterBy) {
     return axios.get(_getUrl())
     .then(res => {
-        let filteredToys = res.data;
+        if (!filterBy) return res.data;
         
+        let filteredToys = res.data;
+        if (filterBy.inStock !== null) filteredToys = filteredToys.filter (toy => toy.inStock === JSON.parse(filterBy.inStock));
+        if (filterBy.name) filteredToys = filteredToys.filter(toy => toy.name.toLowerCase().includes(filterBy.name.toLowerCase()));
+        if (filterBy.toyType !== 'all') filteredToys = filteredToys.filter(toy => toy.type === filterBy.toyType);
+
+        filteredToys.sort(UtilService.createSortFuncTxt(filterBy.sort.sortBy, filterBy.sort.way));
+        
+        return filteredToys;
     })
 }
 
