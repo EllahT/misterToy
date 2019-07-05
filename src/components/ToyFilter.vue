@@ -8,6 +8,7 @@
         </option>
       </select>
       <select @change="emitFilter" v-model="filterBy.inStock">
+        <option value=null>All</option>
         <option value=true>In Stock</option>
         <option value=false>Not In Stock</option>
       </select>

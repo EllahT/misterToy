@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import ToyService from './services/ToyService';
 import UtilService from './services/UtilService';
+import UserService from './services/UserService';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,17 @@ export default new Vuex.Store({
         sortBy: 'name',
         way: '+'
       }
+    },
+    showChat: false,
+    chats: [{_id: 'cht1', txt:'Support: Hello, what\'s on your mind?'}],
+    loadingChatLine: false,
+    loadingToys: false,
+    userData: {
+      _id: 'usr1', 
+      name: 'Puki Levi', 
+      gender:'female', 
+      time: null, 
+      color: null
     }
   },
 
@@ -43,6 +55,26 @@ export default new Vuex.Store({
       }
 
       return [];
+    },
+
+    showChat(state) {
+      return state.showChat;
+    },
+
+    chats(state) {
+      return state.chats;
+    },
+
+    loadingChatLine(state) {
+      return state.loadingChatLine;
+    },
+
+    loadingToys(state) {
+      return state.loadingToys;
+    },
+
+    userData(state) {
+      return state.userData;
     }
   },
 
@@ -67,14 +99,36 @@ export default new Vuex.Store({
 
     setFilter(state, {filterBy}) {
       state.filterBy = JSON.parse(JSON.stringify(filterBy));
-    }
+    },
+
+    toggleShowChat(state) {
+      state.showChat = !state.showChat;
+    },
+
+    addChatLine(state, {chatLine}) {
+      state.chats.push(chatLine);      
+    },
+
+    toggleLoadingChatLine(state) {
+      state.loadingChatLine = !state.loadingChatLine;
+    },
+
+    setLoadingToys(state, {val}) {
+      state.loadingToys = val;
+    },
+
+    setUser(state, {userData}) {
+      state.userData = JSON.parse(JSON.stringify(userData));
+    },
 
   },
   actions: {
-    loadToys(context) {
-      ToyService.query()
+    loadToys(context, {filterBy}) {
+      context.commit({type:'setLoadingToys', val: true});
+      ToyService.query(filterBy)
       .then(filteredToys => {
         context.commit({type: 'setToys', filteredToys})
+        context.commit({type:'setLoadingToys', val: false});
       })
     },
 
@@ -106,10 +160,39 @@ export default new Vuex.Store({
     },
 
     setFilter(context, {filterBy}) {
+      context.commit({type:'setLoadingToys', val: true});
       context.commit({type: 'setFilter', filterBy})
       ToyService.query(filterBy)
       .then((filteredToys) => {
         context.commit({type: 'setToys', filteredToys})
+        context.commit({type:'setLoadingToys', val: false});
+      })
+    },
+
+    toggleChat(context) {
+      context.commit({type: 'toggleShowChat'})
+    },
+
+    addChatLine(context, {chatLine}) {
+      context.commit({type: 'addChatLine', chatLine: {txt: 'User: '+chatLine, _id: UtilService.makeId()}})
+      context.commit({type: 'toggleLoadingChatLine'})
+      setTimeout(()=> {
+        context.commit({type: 'addChatLine', chatLine: {txt: 'Support: Sure think honey', _id: UtilService.makeId()}});
+        context.commit({type: 'toggleLoadingChatLine'});
+      },1300)
+    },
+
+    loadUserData(context) {
+      UserService.query()
+      .then(userData => {
+        context.commit({type: 'setUser', userData});
+      })
+    },
+
+    updateUserData(context, {userData}) {
+      UserService.update(userData)
+      .then(() => {
+        context.commit({type: 'setUser', userData});
       })
     }
   },

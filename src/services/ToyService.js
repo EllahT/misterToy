@@ -15,7 +15,7 @@ function query(filterBy) {
         if (!filterBy) return res.data;
         
         let filteredToys = res.data;
-        if (filterBy.inStock !== null) filteredToys = filteredToys.filter (toy => toy.inStock === JSON.parse(filterBy.inStock));
+        if (JSON.parse(filterBy.inStock) !== null) filteredToys = filteredToys.filter (toy => toy.inStock === JSON.parse(filterBy.inStock));
         if (filterBy.name) filteredToys = filteredToys.filter(toy => toy.name.toLowerCase().includes(filterBy.name.toLowerCase()));
         if (filterBy.toyType !== 'all') filteredToys = filteredToys.filter(toy => toy.type === filterBy.toyType);
 
