@@ -1,0 +1,16 @@
+[
+    {
+      "_id": "usr1",
+      "name": "Puki Levi",
+      "gender": {
+        "type": "unknown",
+        "display": "I'd rather not say"
+      },
+      "time": {
+        "hours": 3,
+        "minutes": 11,
+        "AMPM": "am"
+      },
+      "color": "#82C34B"
+    }
+  ]
