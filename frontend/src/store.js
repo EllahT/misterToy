@@ -234,7 +234,7 @@ export default new Vuex.Store({
       context.commit({type: 'addChatLine', chatLine: {txt: 'User: '+chatLine, _id: UtilService.makeId()}})
       context.commit({type: 'toggleLoadingChatLine'})
       setTimeout(()=> {
-        context.commit({type: 'addChatLine', chatLine: {txt: 'Support: Sure think honey', _id: UtilService.makeId()}});
+        context.commit({type: 'addChatLine', chatLine: {txt: 'Support: Sure thing honey', _id: UtilService.makeId()}});
         context.commit({type: 'toggleLoadingChatLine'});
       },1300)
     },
