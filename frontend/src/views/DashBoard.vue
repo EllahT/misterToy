@@ -1,22 +1,27 @@
 <template>
   <div>
-     <toys-charts :labelsArr="typesPricesLabels" 
+     <doughnut-charts :labelsArr="typesPricesLabels" 
      :label="typesPricesLabel" 
      :dataArr="typePricesDatas"
      class="chart">
-     </toys-charts>
-     <toys-charts :labelsArr="yearsToysLabels" 
+     </doughnut-charts>
+     <line-charts :labelsArr="yearsToysLabels" 
      :label="yearsToysLabel" 
      :dataArr="yearsToysDatas" 
      class="chart">
-     </toys-charts>
+     </line-charts>
   </div>
 </template>
 
 <script>
-import ToysCharts from '@/components/ToysCharts.vue';
+import LineCharts from '@/components/LineCharts.vue';
+import DoughnutCharts from '@/components/DoughnutCharts.vue';
 
 export default {
+    created() {
+      this.$store.dispatch({type: 'loadToys'});
+    },
+
     computed: {
       typesAndPrices() {
         return this.$store.getters.toyTypesAndPrices;
@@ -54,7 +59,8 @@ export default {
     },
 
     components: {
-        ToysCharts
+        LineCharts,
+        DoughnutCharts
     }
 }
 
@@ -64,7 +70,8 @@ export default {
 .chart {
   max-width: 400px;
   max-height: 400px;
-  margin: 0 auto;
+  margin: 5px auto;
+  display: inline-block;
 }
 </style>
 
