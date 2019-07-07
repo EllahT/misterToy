@@ -154,6 +154,10 @@ form > div {
     box-shadow: none;
   }
 
+  .showChatBtn {
+    color: hotpink;
+  }
+
   .stores-page {
     display: flex;
     justify-content: center;
