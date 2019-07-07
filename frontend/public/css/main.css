@@ -150,6 +150,8 @@ form > div {
     right: 0;
     margin: 5px;
     cursor: pointer;
+    border: none;
+    box-shadow: none;
   }
 
   .stores-page {
@@ -170,3 +172,10 @@ form > div {
   select, input, button {
     font-family: inherit;
   }
+
+  .share .network {
+    cursor: pointer;
+    margin: 5px;
+  }
+
+
