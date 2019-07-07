@@ -1,7 +1,9 @@
 <template>
   <div>
-      <toy-filter :currFilter="filterBy" @filterChanged="setFilter"></toy-filter>
-      <router-link to="/edit">Add Toy</router-link>
+      <div class="top-bar">
+        <toy-filter :currFilter="filterBy" @filterChanged="setFilter"></toy-filter>
+        <router-link to="/edit">Add Toy</router-link>
+      </div>
       <img v-if="loadingToys" src="@/assets/loading.gif"/>
       <toy-list v-else :toys="toys" @remove="removeToy"></toy-list>
   </div>

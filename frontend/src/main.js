@@ -5,6 +5,7 @@ import store from './store';
 import VeeValidate from 'vee-validate';
 import './filters';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import './scss/main.scss';
 
 Vue.config.productionTip = false;
 

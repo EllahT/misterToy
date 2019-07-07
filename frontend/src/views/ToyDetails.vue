@@ -3,8 +3,8 @@
       <h1>{{toy.name}}</h1>
       <img :src="toy.imgSrc"/>
       <div class="details-container">
-        <h4>{{toy.price | formatPrice}}</h4>
-        <h4>{{toy.type}}</h4>
+        <h4>Price: {{toy.price | formatPrice}}</h4>
+        <h4>Type: {{toy.type}}</h4>
         <h4>Added to store {{toy.createdAt | timeAgo}}</h4>
         <h5>{{inStockToDisplay}}</h5>
         <div class="actions">

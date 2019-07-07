@@ -20,12 +20,12 @@
         <label>In Stock:</label>
         <input type="checkbox" v-model="toy.inStock" />
       </div>
-      <div class="img-form">
+      <div class="img-form" v-if="toy._id">
         <label>Image:</label>
         <div class="actions">
           <img :src="toy.imgSrc" />
-          <button @click.prevent="changeImg">Change (random)</button>
-          <button @click.prevent="uploadImg">Change (from computer)</button>
+          <button @click.prevent="changeImg">Set a random image</button>
+          <button @click.prevent="uploadImg">Upload an image</button>
         </div>
       </div>
       <button>Save</button>
@@ -81,7 +81,7 @@ export default {
     changeImg() {
         this.$store.dispatch({type: 'changeImg', toyId: this.toy._id})
         .then(updatedToy => {
-            this.toy = updatedToy;
+            this.toy.imgSrc = updatedToy.imgSrc;
         })
     },
 

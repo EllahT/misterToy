@@ -1,8 +1,11 @@
 <template>
   <div id="app" @keydown.escape="closeChat">
-    <app-header></app-header>
+    <app-header/>
     <router-view/>
-    <footer><social-sharing></social-sharing></footer>
+    <footer>
+      <social-sharing/>
+    </footer>
+    
     <chat-app v-if="showChat">
         <h1 slot="box-header">User Chat</h1>
         <div></div>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="user-profile">
         <form @submit.prevent="updateUserData">
             <div>
                 <label>Email:</label>
@@ -33,7 +33,6 @@
 </template>
 
 <script>
-
 import GenderPicker from '@/components/GenderPicker.vue';
 import TimePicker from '@/components/TimePicker.vue';
 import ColorPicker from '@/components/ColorPicker.vue';
@@ -74,13 +73,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.errors {
-    color:red;
-}
-
-.submit-btn {
-    margin: 10px;
-}
-</style>

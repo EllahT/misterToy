@@ -1,0 +1,264 @@
+@font-face {
+  font-family: "titillium";
+  src: url("../../public/fonts/TitilliumWeb-Light.ttf");
+}
+
+body {
+  text-align: center;
+  color: #2c3e50;
+  font-family: "titillium";
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+  margin: 5px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input,
+select {
+  padding: 5px;
+  margin: 2px;
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+}
+
+.showChatBtn {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1px solid #2c3e50;
+  box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.5);
+  background: white;
+}
+.showChatBtn:hover {
+  background: #f8fafa;
+  color: white;
+  box-shadow: 0px 0px 5px 0px #2c3e50;
+}
+
+footer {
+  margin-top: 10px;
+
+  .share .network {
+    cursor: pointer;
+    margin: 5px;
+  }
+}
+
+form {
+  margin: 0 auto;
+  display: inline-block;
+
+  > div {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.img-form .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 150px;
+  }
+
+  button {
+    margin: 5px;
+  }
+}
+
+.picker,
+input {
+  display: inline-block;
+  margin: 3px 5px;
+}
+
+.sub-picker {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  padding: 5px;
+
+  a {
+    font-weight: bold;
+    color: #2a6171;
+  }
+  a.router-link-exact-active {
+    color: #f34573;
+  }
+}
+
+#app > footer {
+  padding: 10px 0;
+  width: 100%;
+  background-color: #d7f7f5;
+}
+
+.homepage {
+  height: 70vh;
+  background-image: url("../../public/img/homepage.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f34573;
+}
+
+#app > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d7f7f5;
+  color: #2a6171;
+  margin-bottom: 10px;
+  padding: 0 15px;
+
+  h2 {
+    white-space: nowrap;
+  }
+}
+
+.top-bar {
+  display: flex;
+  justify-content: center;
+
+  a {
+    margin-left: 20px;
+  }
+}
+
+.toy-preview {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  padding: 5px 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  border-radius: 10px;
+  max-width: max-content;
+  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
+
+  > img {
+    max-height: 120px;
+    max-width: 100%;
+    box-shadow: 0 3px 12px -4px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.toy-preview:hover {
+  box-shadow: 0 1px 8px -1px rgba(0, 0, 0, 0.4);
+}
+
+.toy-preview.inStock {
+  background-color: #d7f7f5;
+}
+
+.toy-preview.notInStock {
+  background-color: #fbd1b7;
+}
+
+.toy-preview button,
+.toy-details button {
+  border: none;
+  box-shadow: none;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid #f34573;
+  border-radius: 7px;
+  outline: none;
+  color: inherit;
+  font-size: 1rem;
+  margin: 0 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 12px -1px #afa7a7;
+}
+
+button:hover,
+a:hover {
+  color: #f34573;
+}
+
+.notInStock button:hover,
+.notInStock a:hover {
+  color: #75cac3;
+}
+
+.toy-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  h1 {
+    flex-basis: 100%;
+  }
+
+  img {
+    max-height: 400px;
+    max-width: 400px;
+    margin-right: 15px;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
+.stores-page {
+  display: flex;
+  justify-content: center;
+
+  .stores-list {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.user-profile {
+  .errors {
+    color: red;
+  }
+
+  .submit-btn {
+    margin: 10px;
+  }
+}

@@ -45,28 +45,26 @@
 
 </script>
 
-<style>
-    .color-item {
-        height: 20px;
-        width: 20px;
-        border-radius: 20px;
-        margin: 2px;
-        cursor: pointer;
-        color: white;
-    }
-
+<style lang="scss">
     .colors-list {
-        max-height: 120px;
-        max-width: 120px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-    }
+        max-width: 120px;
+            
+        .color-item {
+            height: 20px;
+            width: 20px;
+            border-radius: 20px;
+            margin: 2px;
+            cursor: pointer;
+            color: white;
+        }
 
-    .colors-list button {
-        margin: 3px;
-        border-radius: 40px;
-        max-width: 80px;
+        button {
+            margin: 3px;
+            border-radius: 40px;
+            max-width: 80px;
+        }
     }
-
 </style>

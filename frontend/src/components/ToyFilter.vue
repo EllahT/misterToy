@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="filterBy.name" placeholder="search toy by name" @input="emitFilter"/>
+    <input type="text" v-model="filterBy.name" placeholder="Search toy by name..." @input="emitFilter"/>
       <select @change="emitFilter" v-model="filterBy.toyType">
         <option value="all">All</option>
         <option v-for="type in types" :value="type" :key="type">
@@ -16,9 +16,10 @@
         <option value="name">Name</option>
         <option value="price">Price</option>
       </select>
+
       <select @change="emitFilter" v-model="filterBy.sortWay">
-        <option value="up">up</option>
-        <option value="down">down</option>
+        <option value="up">Ascending</option>
+        <option value="down">Descending</option>
       </select>
   </div>
 </template>
