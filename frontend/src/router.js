@@ -6,6 +6,7 @@ import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
 import UserProfile from './views/UserProfile.vue';
 import DashBoard from './views/DashBoard.vue';
+import OurStores from './views/OurStores.vue';
 
 Vue.use(Router);
 
@@ -22,6 +23,10 @@ export default new Router({
     {
       path: '/dashboard',
       component: DashBoard
+    },
+    {
+      path: '/stores',
+      component: OurStores
     },
     {
       path: '/toy',

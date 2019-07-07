@@ -1,11 +1,11 @@
 <template>
   <div>
-     <doughnut-charts :labelsArr="typesPricesLabels" 
+     <doughnut-charts v-if="Object.keys(typesAndPrices).length" :labelsArr="typesPricesLabels" 
      :label="typesPricesLabel" 
      :dataArr="typePricesDatas"
      class="chart">
      </doughnut-charts>
-     <line-charts :labelsArr="yearsToysLabels" 
+     <line-charts v-if="Object.keys(yearsToysDatas).length" :labelsArr="yearsToysLabels" 
      :label="yearsToysLabel" 
      :dataArr="yearsToysDatas" 
      class="chart">

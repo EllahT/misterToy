@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/profile">User Profile</router-link> |
       <router-link to="/dashboard">Dashboard</router-link> |
+      <router-link to="/stores">Stores</router-link> |
       <router-link to="/toy">Mister Toy</router-link> 
     </div>
     <router-view/>
