@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import UtilService from "./services/UtilService";
+import ImageService from "./services/ImageService.js";
 import UserStore from "./modules/UserStore.js";
 import ToyStore from "./modules/ToyStore.js";
 
@@ -68,6 +69,16 @@ export default new Vuex.Store({
         });
         context.commit({ type: "toggleLoadingChatLine" });
       }, 1300);
+    },
+
+    getRandomImg(context) {
+      return ImageService.getRandomImg()
+      .then(imgSrc => imgSrc)
+    },
+
+    uploadImg(context, {event}) {
+      return ImageService.uploadImg(event)
+      .then(imgSrc => imgSrc)
     }
   },
 

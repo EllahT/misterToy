@@ -6,8 +6,7 @@ export default {
     query,
     add,
     update,
-    remove,
-    changeImg
+    remove
 }
 
 function query(filterBy) {
@@ -34,11 +33,6 @@ function remove(toyId) {
 function getById(toyId) {
     return axios.get(_getUrl(toyId))
     .then(res => res.data)
-}
-
-function changeImg(toyId) {
-    return axios.put(_getUrl(toyId)+'/setRandomImg')
-        .then(res => res.data)
 }
 
 function _getUrl(id = '') {

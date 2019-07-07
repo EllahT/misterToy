@@ -20,12 +20,14 @@
         <label>In Stock:</label>
         <input type="checkbox" v-model="toy.inStock" />
       </div>
-      <div class="img-form" v-if="toy._id">
+      <div class="img-form">
         <label>Image:</label>
         <div class="actions">
-          <img :src="toy.imgSrc" />
-          <button @click.prevent="changeImg">Set a random image</button>
-          <button @click.prevent="uploadImg">Upload an image</button>
+          <h6 v-if="isLoadingPic">Image Is Coming Soon</h6>
+          <img :src="toy.imgSrc"/>
+          <button @click.prevent="getRandomImg">Set a random image</button>
+          <button @click.prevent="openFileInput">Upload an image</button>
+          <input v-if="isFileUpload" @change="uploadImage" type="file"/>
         </div>
       </div>
       <button>Save</button>
@@ -44,7 +46,9 @@ export default {
             type: '',
             inStock: true,
             imgSrc: ''
-          }
+          },
+          isFileUpload: false,
+          isLoadingPic: false
       }
   },
   created() {
@@ -78,15 +82,26 @@ export default {
           }
     },
 
-    changeImg() {
-        this.$store.dispatch({type: 'changeImg', toyId: this.toy._id})
-        .then(updatedToy => {
-            this.toy.imgSrc = updatedToy.imgSrc;
+    getRandomImg() {
+        this.isLoadingPic = true;
+        this.$store.dispatch({type: 'getRandomImg'})
+        .then(imgSrc => {
+            this.toy.imgSrc = imgSrc;
+            this.isLoadingPic = false;
         })
     },
 
-    uploadImg() {
+    openFileInput() {
+      this.isFileUpload = !this.isFileUpload;
+    },
 
+    uploadImage(event) {
+      this.isLoadingPic = true;
+      this.$store.dispatch({type: 'uploadImg', event})
+      .then(imgSrc => {
+        this.toy.imgSrc = imgSrc;
+        this.isLoadingPic = false;
+      })
     }
   }
 };
