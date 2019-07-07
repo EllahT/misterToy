@@ -94,9 +94,10 @@ export default {
   actions: {
     loadToys(context) {
       context.commit({ type: "setLoadingToys", val: true });
-      ToyService.query(context.state.filterBy).then(filteredToys => {
+      return ToyService.query(context.state.filterBy).then(filteredToys => {
         context.commit({ type: "setToys", filteredToys });
         context.commit({ type: "setLoadingToys", val: false });
+        return filteredToys;
       });
     },
 

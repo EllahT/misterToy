@@ -105,7 +105,7 @@ form > div {
     align-items: center;
   }
 
-  .toy-preview button {
+  .toy-preview button, .toy-details button {
     border: none;
     box-shadow: none;
   }
@@ -141,6 +141,26 @@ form > div {
 
   .toy-preview > img {
     max-height: 120px;
+  }
+
+  .toy-details > img {
+    max-height: 400px;
+  }
+
+  .toy-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .toy-details > h1 {
+    flex-basis: 100%;
+  }
+
+  .toy-details .details-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .showChatBtn {
@@ -181,5 +201,4 @@ form > div {
     cursor: pointer;
     margin: 5px;
   }
-
 
