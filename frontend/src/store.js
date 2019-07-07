@@ -182,23 +182,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loadToys(context, payload) {
+    loadToys(context) {
       context.commit({type:'setLoadingToys', val: true});
-      if (payload.filterBy) {
-        ToyService.query(payload.filterBy)
+        ToyService.query(context.state.filterBy)
         .then(filteredToys => {
-          context.commit({type: 'setToys', filteredToys})
+          context.commit({type: 'setToys', filteredToys});
           context.commit({type:'setLoadingToys', val: false});
         })
-      } else {
-        ToyService.query()
-        .then(allToys => {
-          context.commit({type: 'setToys', allToys})
-          context.commit({type:'setLoadingToys', val: false});
-        })
-      }
-      
-      
     },
 
     updateToy(context, {toy}) {

@@ -21,7 +21,7 @@ import ChatApp from '@/components/ChatApp.vue';
 export default {
   name: 'ToyAppPage',
   created() {
-      this.$store.dispatch({type: 'loadToys', filterBy: this.filterBy})
+      this.$store.dispatch({type: 'loadToys'})
   },
 
   computed: {
