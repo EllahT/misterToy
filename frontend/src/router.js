@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import AppHome from './views/AppHome.vue';
 import ToyAppPage from './views/ToyAppPage.vue';
 import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
 import UserProfile from './views/UserProfile.vue';
-import DashBoard from './views/DashBoard.vue';
+import AppStatistics from './views/AppStatistics.vue';
 import OurStores from './views/OurStores.vue';
 
 Vue.use(Router);
@@ -14,15 +14,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Home
+      component: AppHome
     },
     {
       path: '/profile',
       component: UserProfile
     },
     {
-      path: '/dashboard',
-      component: DashBoard
+      path: '/statistics',
+      component: AppStatistics
     },
     {
       path: '/stores',

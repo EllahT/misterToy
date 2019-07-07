@@ -64,8 +64,7 @@
     }
 
     .colors-list button {
-        margin: 10px;
-        background-color: lightblue;
+        margin: 3px;
         border-radius: 40px;
         max-width: 80px;
     }

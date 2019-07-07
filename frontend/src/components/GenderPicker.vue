@@ -48,8 +48,8 @@
 
 <style>
 .dropbtn {
-  color: white;
-  background-color: #42b983;
+  color: #2a6171;
+  background-color: #d7f7f5;
   font-size: inherit;
   padding: 2px 10px;
   border: none;

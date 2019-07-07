@@ -44,15 +44,17 @@ form > div {
   
   nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #2a6171;
   }
   
   nav a.router-link-exact-active {
-    color: #42b983;
+    color: #f34573;
   }
   
   a {
     text-decoration: none;
+    color: inherit;
+    margin: 5px;
   }
   
   #app > footer {
@@ -72,7 +74,7 @@ form > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c5f3f9;
+    color: #f34573;
   }
 
   #app > header {
@@ -81,6 +83,7 @@ form > div {
     align-items: center;
     background-color: #d7f7f5;
     color: #2a6171;
+    margin-bottom: 10px;
   }
 
   .toy-preview {
@@ -96,6 +99,17 @@ form > div {
     max-width: max-content;
   }
 
+  .toy-preview .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toy-preview button {
+    border: none;
+    box-shadow: none;
+  }
+
   .toy-preview.inStock {
     background-color: #d7f7f5;
   }
@@ -104,22 +118,25 @@ form > div {
     background-color: #fbd1b7;
   }
 
-  button, a {
+  button {
     background-color: transparent;
-    border: none;
+    border: 1px solid #f34573;
+    border-radius: 15px;
     outline: none;
     color: inherit;
     font-size: 1rem;
     margin: 0 3px;
-    padding: 0;
+    padding: 5px;
+    cursor: pointer;
+    box-shadow: 3px 3px 7px 0px #afa7a7;
   }
 
   button:hover, a:hover {
-    color: #fbd1b7;
+    color: #f34573;
   }
 
   .notInStock button:hover, .notInStock a:hover {
-    color: #d7f7f5;
+    color: #75cac3;
   }
 
   .toy-preview > img {
@@ -133,4 +150,23 @@ form > div {
     right: 0;
     margin: 5px;
     cursor: pointer;
+  }
+
+  .stores-page {
+    display: flex;
+    justify-content: center;
+  }
+
+  .stores-list {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  input, select {
+    padding: 5px;
+    margin: 2px;
+  }
+
+  select, input, button {
+    font-family: inherit;
   }

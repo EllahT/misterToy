@@ -26,7 +26,7 @@
                 <label>Color:</label>
                 <color-picker v-model="userData.color"></color-picker>
             </div>
-            <button>Save Preferences</button>
+            <button class="submit-btn">Save Preferences</button>
         </form>
 
     </div>
@@ -78,5 +78,9 @@ export default {
 <style>
 .errors {
     color:red;
+}
+
+.submit-btn {
+    margin: 10px;
 }
 </style>

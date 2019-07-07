@@ -1,5 +1,5 @@
 <template>
-  <div @keydown.escape="closeChat">
+  <div>
       <toy-filter :currFilter="filterBy" @filterChanged="setFilter"></toy-filter>
       <router-link to="/edit">Add Toy</router-link>
       <img v-if="loadingToys" src="@/assets/loading.gif"/>

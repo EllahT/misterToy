@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @keydown.escape="closeChat">
     <app-header></app-header>
     <router-view/>
     <footer><social-sharing></social-sharing></footer>

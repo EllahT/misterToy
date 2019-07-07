@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="stores-page">
       <GmapMap
       class="map"
       ref="mapRef"
@@ -17,7 +17,7 @@
         @click="setCenter(m.position)"
       />
     </GmapMap>
-    <ul>
+    <ul class="stores-list">
       <li v-for="(store, index) in markers"><button @click="setCenter(store.position)">{{store.name}}</button></li>
     </ul>
   </div>
