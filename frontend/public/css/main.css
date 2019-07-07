@@ -22,6 +22,21 @@ form > div {
     justify-content: space-between;
 }
 
+.edit-toy img {
+  max-width: 150px;
+}
+
+.img-form .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-form .actions button {
+  margin: 5px;
+}
+
 .picker, input {
     display: inline-block;
     margin: 3px 5px;

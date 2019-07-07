@@ -129,6 +129,13 @@ export default {
         context.commit({ type: "setToys", filteredToys });
         context.commit({ type: "setLoadingToys", val: false });
       });
+    },
+
+    changeImg(context, {toyId}) {
+      return ToyService.changeImg(toyId).then(updatedToy => {
+        context.commit({ type: "updateToy", updatedToy });
+        return updatedToy;
+      })
     }
   }
 };

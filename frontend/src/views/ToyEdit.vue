@@ -1,29 +1,35 @@
 <template>
-  <div>
-      <form @submit.prevent="saveToy">
-        <label>
-            Name:
-            <input type="text" v-model="toy.name"/>
-        </label>
-        <label>
-            Price:
-            <input type="number" v-model="toy.price"/>
-        </label>
-        <label>
-            Type:
-            <input list="types" v-model="toy.type"/>           
-            <datalist id="types">
-                <option v-for="type in types" :value="type" :key="type">
-                    {{type}}
-                </option>
-            </datalist>
-        </label>
-        <label>
-            In Stock:
-            <input type="checkbox" v-model="toy.inStock"/>
-        </label>
-        <button>Save</button>
-      </form>
+  <div class="edit-toy">
+    <form @submit.prevent="saveToy">
+      <div>
+        <label>Name:</label>
+        <input type="text" v-model="toy.name" />
+      </div>
+      <div>
+        <label>Price:</label>
+        <input type="number" v-model="toy.price" />
+      </div>
+      <div>
+        <label>Type:</label>
+        <input list="types" v-model="toy.type" />
+        <datalist id="types">
+          <option v-for="type in types" :value="type" :key="type">{{type}}</option>
+        </datalist>
+      </div>
+      <div>
+        <label>In Stock:</label>
+        <input type="checkbox" v-model="toy.inStock" />
+      </div>
+      <div class="img-form">
+        <label>Image:</label>
+        <div class="actions">
+          <img :src="toy.imgSrc" />
+          <button @click.prevent="changeImg">Change (random)</button>
+          <button @click.prevent="uploadImg">Change (from computer)</button>
+        </div>
+      </div>
+      <button>Save</button>
+    </form>
   </div>
 </template>
 
@@ -36,13 +42,17 @@ export default {
             name: '',
             price: 0,
             type: '',
-            inStock: true
+            inStock: true,
+            imgSrc: ''
           }
       }
   },
   created() {
     const toyId = this.$route.params.toyId;
-    if (toyId) this.toy = JSON.parse(JSON.stringify(this.$store.getters.toyById(toyId)));
+    this.$store.dispatch({type: 'loadToys'})
+      .then (() => {
+        if (toyId) this.toy = JSON.parse(JSON.stringify(this.$store.getters.toyById(toyId)));
+      })
     },
 
   computed: {
@@ -52,7 +62,7 @@ export default {
   },
 
   methods: {
-      saveToy() {
+    saveToy() {
           if (this.toy._id) {
               this.$store.dispatch({type: 'updateToy', toy:this.toy})
               .then(() => {
@@ -66,9 +76,18 @@ export default {
                 this.$router.push('/toy');
               })
           }
+    },
 
-          
-      }
+    changeImg() {
+        this.$store.dispatch({type: 'changeImg', toyId: this.toy._id})
+        .then(updatedToy => {
+            this.toy = updatedToy;
+        })
+    },
+
+    uploadImg() {
+
+    }
   }
 };
 </script>
