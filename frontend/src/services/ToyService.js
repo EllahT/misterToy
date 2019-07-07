@@ -10,19 +10,9 @@ export default {
 }
 
 function query(filterBy) {
-    return axios.get(_getUrl(_getQueryString(filterBy)))
-    .then(res => {
-        if (!filterBy) return res.data;
-        
-        let filteredToys = res.data;
-        if (JSON.parse(filterBy.inStock) !== null) filteredToys = filteredToys.filter (toy => toy.inStock === JSON.parse(filterBy.inStock));
-        if (filterBy.name) filteredToys = filteredToys.filter(toy => toy.name.toLowerCase().includes(filterBy.name.toLowerCase()));
-        if (filterBy.toyType !== 'all') filteredToys = filteredToys.filter(toy => toy.type === filterBy.toyType);
-
-        filteredToys.sort(UtilService.createSortFuncTxt(filterBy.sort.sortBy, filterBy.sort.way));
-        
-        return filteredToys;
-    })
+    if (!filterBy) return axios.get(_getUrl());
+    else return axios.get(_getUrl(_getQueryString(filterBy)))
+    .then(res => res.data)
 }
 
 function update(toy) {
@@ -46,13 +36,14 @@ function getById(toyId) {
 }
 
 function _getUrl(id = '') {
-    return `http://localhost:3000/toy/${id}`
+    return `http://localhost:3000/api/toy/${id}`
 }
 
 function _getQueryString(filterBy) {
     var queryStrings = Object.entries(filterBy).map(entry => {
-        return `?${entry[0]}=${entry[1]}`;
+        return `${entry[0]}=${entry[1]}&`;
     })
 
+    queryStrings.unshift('?');
     return queryStrings.join('');
 }

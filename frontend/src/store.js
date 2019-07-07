@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import ToyService from './services/ToyService';
 import UtilService from './services/UtilService';
 import UserService from './services/UserService';
+import moment from 'moment';
 
 Vue.use(Vuex);
 
@@ -14,7 +15,7 @@ export default new Vuex.Store({
       inStock: null,
       toyType: 'all',
       sortBy: 'name',
-      sortWay: '+'
+      sortWay: 'up'
     },
     showChat: false,
     chats: [{_id: 'cht1', txt:'Support: Hello, what\'s on your mind?'}],
@@ -32,7 +33,8 @@ export default new Vuex.Store({
         minutes: 10,
         AMPM: 'pm'
       }, 
-      color: null
+      color: null,
+      email: null
     },
     genders: [
               {
@@ -75,6 +77,32 @@ export default new Vuex.Store({
       }
 
       return [];
+    },
+
+    toyTypesAndPrices(state) {
+      if (state.toys) {
+        const typesAndPriceMap = state.toys.reduce((acc, toy) => {
+          if (!acc[toy.type]) acc[toy.type] = JSON.parse(toy.price);
+          else acc[toy.type] += JSON.parse(toy.price);
+          return acc;
+      }, {})
+
+      return typesAndPriceMap;
+      }
+
+      return [];
+    },
+
+    toysCountByYear(state) {
+      if (state.toys) {
+        const toysCountByYear = state.toys.reduce((acc, toy) => {
+          if (!acc[moment(toy.createdAt).year()]) acc[moment(toy.createdAt).year()] = 1;
+          else acc[moment(toy.createdAt).year()]++;
+          return acc;
+        }, {})
+
+        return toysCountByYear;
+      }
     },
 
     showChat(state) {
@@ -152,16 +180,25 @@ export default new Vuex.Store({
     setColors(state, {colors}) {
       state.colors = colors;
     }
-
   },
   actions: {
-    loadToys(context, {filterBy}) {
+    loadToys(context, payload) {
       context.commit({type:'setLoadingToys', val: true});
-      ToyService.query(filterBy)
-      .then(filteredToys => {
-        context.commit({type: 'setToys', filteredToys})
-        context.commit({type:'setLoadingToys', val: false});
-      })
+      if (payload.filterBy) {
+        ToyService.query(payload.filterBy)
+        .then(filteredToys => {
+          context.commit({type: 'setToys', filteredToys})
+          context.commit({type:'setLoadingToys', val: false});
+        })
+      } else {
+        ToyService.query()
+        .then(allToys => {
+          context.commit({type: 'setToys', allToys})
+          context.commit({type:'setLoadingToys', val: false});
+        })
+      }
+      
+      
     },
 
     updateToy(context, {toy}) {
@@ -173,8 +210,6 @@ export default new Vuex.Store({
     },
 
     addToy(context, {toy}) {
-      toy._id = UtilService.makeId();
-      toy.createdAt = new Date().getTime();
       return ToyService.add(toy)
       .then(addedToy => {
         console.log(addedToy)
@@ -215,7 +250,7 @@ export default new Vuex.Store({
     },
 
     loadUserData(context) {
-      UserService.query()
+      UserService.getById('usr1')
       .then(userData => {
         context.commit({type: 'setUser', userData});
       })
@@ -232,6 +267,13 @@ export default new Vuex.Store({
       UserService.getPreSetColors()
       .then(colors => {
         context.commit({type: 'setColors', colors});
+      })
+    },
+
+    changeColors(context) {
+      UserService.changeColors()
+      .then(colors => {
+        context.commit({type: 'setColors', colors})
       })
     }
   },

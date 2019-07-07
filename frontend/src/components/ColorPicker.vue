@@ -1,9 +1,10 @@
 <template>
-    <div class="colors-list">
-        <div class="color-item" v-for="color in colors" :key="color" 
+    <ul class="colors-list">
+        <li class="color-item" v-for="color in colors" :key="color" 
         :style="{'background-color': color}"
-        @click="emitChangedValue(color)">{{isPicked(color)}}</div>
-    </div>
+        @click="emitChangedValue(color)">{{isPicked(color)}}</li>
+        <button @click.prevent="changeColors">Change Colors</button>
+    </ul>
 </template>
 
 <script>
@@ -33,8 +34,13 @@
 
             isPicked(color) {
                 return (color === this.value)? '✓' : '';
+            },
+
+            changeColors() {
+                this.$store.dispatch({type: 'changeColors'})
             }
         }
+        
     }
 
 </script>
@@ -54,6 +60,14 @@
         max-width: 120px;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .colors-list button {
+        margin: 10px;
+        background-color: lightblue;
+        border-radius: 40px;
+        max-width: 80px;
     }
 
 </style>

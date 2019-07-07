@@ -1,16 +1,1 @@
-[
-    {
-      "_id": "usr1",
-      "name": "Puki Levi",
-      "gender": {
-        "type": "unknown",
-        "display": "I'd rather not say"
-      },
-      "time": {
-        "hours": 3,
-        "minutes": 11,
-        "AMPM": "am"
-      },
-      "color": "#82C34B"
-    }
-  ]
+[{"_id":"usr1","name":"Puki Levi","gender":{"type":"female","display":"🙋‍♀️ Female"},"time":{"hours":6,"minutes":10,"AMPM":"pm"},"color":"#F21058", "email": "puki@gmail.com"}]

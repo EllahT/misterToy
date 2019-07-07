@@ -5,6 +5,7 @@ import ToyAppPage from './views/ToyAppPage.vue';
 import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
 import UserProfile from './views/UserProfile.vue';
+import DashBoard from './views/DashBoard.vue';
 
 Vue.use(Router);
 
@@ -17,6 +18,10 @@ export default new Router({
     {
       path: '/profile',
       component: UserProfile
+    },
+    {
+      path: '/dashboard',
+      component: DashBoard
     },
     {
       path: '/toy',

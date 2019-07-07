@@ -3,11 +3,23 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/profile">User Profile</router-link> |
+      <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/toy">Mister Toy</router-link> 
     </div>
     <router-view/>
+    <footer><social-sharing></social-sharing></footer>
   </div>
 </template>
+
+<script>
+import SocialSharing from './components/SocialSharing.vue';
+
+export default {
+  components: {
+    SocialSharing
+  }
+}
+</script>
 
 <style>
 #app {
@@ -33,4 +45,13 @@
 a {
   text-decoration: none;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 10px 0;
+  width: 100%;
+  background-color: white;
+}
+
 </style>

@@ -12,13 +12,13 @@
         <option value=true>In Stock</option>
         <option value=false>Not In Stock</option>
       </select>
-      <select @change="emitFilter" v-model="filterBy.sort.sortBy">
+      <select @change="emitFilter" v-model="filterBy.sortBy">
         <option value="name">Name</option>
         <option value="price">Price</option>
       </select>
-      <select @change="emitFilter" v-model="filterBy.sort.way">
-        <option value="+">+</option>
-        <option value="-">-</option>
+      <select @change="emitFilter" v-model="filterBy.sortWay">
+        <option value="up">up</option>
+        <option value="down">down</option>
       </select>
   </div>
 </template>
@@ -38,10 +38,8 @@ export default {
       name: '',
       inStock: null,
       toyType: 'all',
-      sort: {
-        sortBy: 'name',
-        way: '+'
-        }
+      sortBy: 'name',
+      sortWay: 'up'
       }
     }
   },

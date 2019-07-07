@@ -2,6 +2,15 @@
     <div>
         <form @submit.prevent="updateUserData">
             <div>
+                <label>Email:</label>
+                <validation-provider rules="required|email">
+                    <template #default="{ errors }">
+                        <input type="email" v-model="userData.email"/>
+                        <p class="errors">{{ errors[0] }}</p>
+                    </template>
+                </validation-provider>
+            </div>
+            <div>
                 <label>Name:</label>
                 <input type="text" v-model="userData.name"/>
             </div>
@@ -28,6 +37,9 @@
 import GenderPicker from '@/components/GenderPicker.vue';
 import TimePicker from '@/components/TimePicker.vue';
 import ColorPicker from '@/components/ColorPicker.vue';
+import { ValidationProvider } from 'vee-validate';
+import Vue from 'vue';
+Vue.component('ValidationProvider', ValidationProvider);
 
 export default {
     created() {
@@ -42,7 +54,8 @@ export default {
                 name: '',
                 gender: {type: '', display: ''},
                 time: '',
-                color: ''
+                color: '',
+                email: null
             }
         }
     },
@@ -56,7 +69,14 @@ export default {
     components: {
         GenderPicker,
         TimePicker,
-        ColorPicker
+        ColorPicker,
+        ValidationProvider
     }
 };
 </script>
+
+<style>
+.errors {
+    color:red;
+}
+</style>
