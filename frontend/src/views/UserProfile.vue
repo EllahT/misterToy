@@ -66,6 +66,7 @@ export default {
             this.$store.dispatch({type: 'updateUserData', userData: this.userData})
             .then((userData) => {
                 console.log('updated')
+                this.$router.push('/');
             })
         }
     },
