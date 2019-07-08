@@ -3,7 +3,7 @@
         <button @click="toggleShowDropdownContent" class="dropbtn">{{value.display}}▼</button>
         <ul v-if="showContent" class="dropdown-content">
             <li v-for="gender in genders" :key="gender.type"
-            @click="emitChangedValue(gender)" 
+            @click.prevent="emitChangedValue(gender)" 
             class="dropdown-item"> {{gender.display}}
             </li>
         </ul>
