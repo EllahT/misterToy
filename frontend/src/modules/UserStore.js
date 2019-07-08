@@ -62,14 +62,16 @@ export default {
 
   actions: {
     loadUserData(context) {
-      UserService.getById("usr1").then(userData => {
+      return UserService.getById("usr1").then(userData => {
         context.commit({ type: "setUser", userData });
+        return userData;
       });
     },
 
     updateUserData(context, { userData }) {
-      UserService.update(userData).then(() => {
+      return UserService.update(userData).then(() => {
         context.commit({ type: "setUser", userData });
+        return userData;
       });
     },
 

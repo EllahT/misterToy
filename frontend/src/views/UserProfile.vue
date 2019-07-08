@@ -42,8 +42,10 @@ Vue.component('ValidationProvider', ValidationProvider);
 
 export default {
     created() {
-        this.$store.dispatch({type: 'loadUserData'});
-        this.userData = JSON.parse(JSON.stringify(this.$store.getters.userData));
+        this.$store.dispatch({type: 'loadUserData'})
+        .then(userData => {
+            this.userData = JSON.parse(JSON.stringify(this.$store.getters.userData));
+        })
     },
 
     data() {
@@ -52,7 +54,7 @@ export default {
                 _id: '',
                 name: '',
                 gender: {type: '', display: ''},
-                time: '',
+                time: {hours: '', minutes: '', AMPM: ''},
                 color: '',
                 email: null
             }
@@ -62,6 +64,9 @@ export default {
     methods: {
         updateUserData() {
             this.$store.dispatch({type: 'updateUserData', userData: this.userData})
+            .then((userData) => {
+                console.log('updated')
+            })
         }
     },
 
@@ -73,3 +78,4 @@ export default {
     }
 };
 </script>
+
