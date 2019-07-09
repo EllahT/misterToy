@@ -1,5 +1,4 @@
-import axios from 'axios';
-const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/' : 'http://localhost:3000/api/';
+import HttpService from './HttpService';
 
 export default {
     getById,
@@ -9,34 +8,26 @@ export default {
     remove
 }
 
+const BASE_URL = 'toy/';
+
 function query(filterBy) {
-    if (!filterBy) return axios.get(_getUrl());
-    else return axios.get(_getUrl(_getQueryString(filterBy)))
-    .then(res => res.data)
+    return HttpService.ajax(`${BASE_URL}${_getQueryString(filterBy)}`);
 }
 
 function update(toy) {
-    return axios.put(_getUrl(toy._id),toy)
-        .then(res => res.data)
+    return HttpService.ajax(`${BASE_URL}${toy._id}`,'put',toy);
 }
 
 function add(toy) {
-    return axios.post(_getUrl(), toy)
-    .then(res => res.data)
+    return HttpService.ajax(BASE_URL,'post',toy);
 }
 
 function remove(toyId) {
-    return axios.delete(_getUrl(toyId))
-    .then(res => res.data)
+    return HttpService.ajax(`${BASE_URL}${toyId}`, 'delete');
 }
 
 function getById(toyId) {
-    return axios.get(_getUrl(toyId))
-    .then(res => res.data)
-}
-
-function _getUrl(id = '') {
-    return `${BASE_URL}toy/${id}`
+    return HttpService.ajax(`${BASE_URL}${toyId}`,'get');
 }
 
 function _getQueryString(filterBy) {

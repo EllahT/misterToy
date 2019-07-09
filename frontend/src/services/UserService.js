@@ -1,39 +1,45 @@
-import axios from 'axios';
-const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/' : 'http://localhost:3000/api/';
+import HttpService from './HttpService';
 
 export default {
     query,
     getById,
+    add,
     update,
+    login,
+    logout,
     getPreSetColors,
     changeColors
 }
 
 function query() {
-    return axios.get(_getUrl())
-    .then(res => res.data);
+    return HttpService.ajax('user/');
 }
 
 function getById(userId) {
-    return axios.get(_getUrl(userId))
-    .then(res => res.data);
+    return HttpService.ajax(`user/${userId}`);
+}
+
+function add(userData) {
+    return HttpService.ajax('user','post',userData);
 }
 
 function update(userData) {
-    return axios.put(_getUrl(userData._id),userData)
-        .then(res => res.data)
+    return HttpService.ajax(`user/${userData._id}`,'put',userData);
 }
 
-function _getUrl(id = '') {
-    return `${BASE_URL}user/${id}`
+function login(username) {
+    return HttpService.ajax(`user/signin`,'post',username);
+}
+
+function logout() {
+    return HttpService.ajax('user.logout','post');
 }
 
 function getPreSetColors() {
-    return axios.get(`${BASE_URL}color`)
-    .then(res => res.data);
+    return HttpService.ajax('color');
 }
 
 function changeColors() {
-    return axios.get(`${BASE_URL}color/new`)
-    .then(res => res.data);
+    return HttpService.ajax('/color/new');
 }
+

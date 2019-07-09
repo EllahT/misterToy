@@ -36,16 +36,13 @@
 import GenderPicker from '@/components/GenderPicker.vue';
 import TimePicker from '@/components/TimePicker.vue';
 import ColorPicker from '@/components/ColorPicker.vue';
-import { ValidationProvider } from 'vee-validate';
+import {ValidationProvider} from 'vee-validate';
 import Vue from 'vue';
 Vue.component('ValidationProvider', ValidationProvider);
 
 export default {
     created() {
-        this.$store.dispatch({type: 'loadUserData'})
-        .then(userData => {
-            this.userData = JSON.parse(JSON.stringify(this.$store.getters.userData));
-        })
+        
     },
 
     data() {
@@ -64,8 +61,8 @@ export default {
     methods: {
         updateUserData() {
             this.$store.dispatch({type: 'updateUserData', userData: this.userData})
-            .then((userData) => {
-                console.log('updated')
+            .then(() => {
+                console.log('updated');
                 this.$router.push('/');
             })
         }
@@ -79,4 +76,5 @@ export default {
     }
 };
 </script>
+
 

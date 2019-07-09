@@ -4,9 +4,11 @@ import AppHome from './views/AppHome.vue';
 import ToyAppPage from './views/ToyAppPage.vue';
 import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
-import UserProfile from './views/UserProfile.vue';
+import EditUser from './views/EditUser.vue';
+import UserDetails from './views/UserDetails.vue';
 import AppStatistics from './views/AppStatistics.vue';
 import OurStores from './views/OurStores.vue';
+import UsersList from './views/UsersList.vue';
 
 Vue.use(Router);
 
@@ -17,8 +19,16 @@ export default new Router({
       component: AppHome
     },
     {
-      path: '/profile',
-      component: UserProfile
+      path: '/user',
+      component: UsersList
+    },
+    {
+      path: '/user/:userId',
+      component: UserDetails
+    },
+    {
+      path: '/user/edit/:userId?',
+      component: EditUser
     },
     {
       path: '/statistics',

@@ -4,21 +4,8 @@ export default {
   strict: true,
 
   state: {
-    userData: {
-      _id: "usr1",
-      name: "Puki Levi",
-      gender: {
-        type: "female",
-        display: "🙋‍♀️ Female"
-      },
-      time: {
-        hours: 6,
-        minutes: 10,
-        AMPM: "pm"
-      },
-      color: null,
-      email: null
-    },
+    users: [],
+    loggedUser: {},
     genders: [
       {
         type: "female",
@@ -37,8 +24,16 @@ export default {
   },
 
   getters: {
-    userData(state) {
-      return state.userData;
+    users(state) {
+      return state.users;
+    },
+
+    userById: state => id => {
+      return state.users.find(user => user._id === id);
+    },
+
+    loggedUser(state) {
+      return state.loggedUser;
     },
 
     genders(state) {
@@ -51,8 +46,21 @@ export default {
   },
 
   mutations: {
-    setUser(state, { userData }) {
-      state.userData = JSON.parse(JSON.stringify(userData));
+    setLoggedUser(state, {user}) {
+      state.loggedUser = user;
+    },
+
+    setUsers(state, {users}) {
+      state.users = users;
+    },
+
+    clearLoggedUser(state) {
+      state.loggedUser = {};
+    },
+
+    updateUser(state, {updatedUser}) {
+      const idx = state.users.findIndex(user => user._id === updatedUser._id);
+      state.users.splice(idx, 1, updatedUser);
     },
 
     setColors(state, { colors }) {
@@ -61,16 +69,31 @@ export default {
   },
 
   actions: {
-    loadUserData(context) {
-      return UserService.getById("usr1").then(userData => {
-        context.commit({ type: "setUser", userData });
-        return userData;
+    loadUsers(context) {
+      return UserService.query()
+        .then(users => {
+        context.commit({ type: "setUsers", users });
+        return users;
       });
+    },
+
+    loginUser(context, {username}) {
+      return UserService.login(username).then((user) => {
+        context.commit({type: 'setLoggedUser', user});
+        return user;
+      })
+    },
+
+    logout(context) {
+      return UserService.logout().then(() => {
+        context.commit({type: 'clearLoggedUser'});
+        return {};
+      })
     },
 
     updateUserData(context, { userData }) {
       return UserService.update(userData).then(() => {
-        context.commit({ type: "setUser", userData });
+        context.commit({ type: "updateUser", userData });
         return userData;
       });
     },
