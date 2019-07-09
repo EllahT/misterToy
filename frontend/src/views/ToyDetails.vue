@@ -8,7 +8,7 @@
         <h4>Added to store {{toy.createdAt | timeAgo}}</h4>
         <h5>{{inStockToDisplay}}</h5>
         <div class="actions">
-          <button @click="emitRemoveToy(toy._id)">Delete</button>
+          <button @click="removeToy(toy._id)">Delete</button>
           <router-link :to="editUrl">Edit</router-link>
         </div>
       </div>
@@ -50,8 +50,10 @@ export default {
   },
 
   methods: {
-    emitRemoveToy(toyId) {
-      this.$emit('removeToy', toyId);
+    removeToy(toyId) {
+      this.$store.dispatch({type: 'removeToy', toyId}).then(() => {
+        this.$router.push('/toy');
+      })
     }
   }
 }

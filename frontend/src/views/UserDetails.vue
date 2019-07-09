@@ -1,14 +1,13 @@
 <template>
-  <div class="toy-details">
-      <h1>{{toy.name}}</h1>
-      <img :src="toy.imgSrc"/>
-      <div class="details-container">
-        <h4>Price: {{toy.price | formatPrice}}</h4>
-        <h4>Type: {{toy.type}}</h4>
-        <h4>Added to store {{toy.createdAt | timeAgo}}</h4>
-        <h5>{{inStockToDisplay}}</h5>
+  <div class="user-details">
+      <h1>{{user.name}}</h1>
+      <h2>Email: {{user.email}}</h2>
+      <h4>Gender: {{user.gender.display}}</h4>
+      <h4 :style="{'color': user.color}">Color</h4>
+      <h4>Time: {{user.time.hours}}: {{user.time.minutes}} {{user.time.AMPM}}</h4>
+      <h4>Admin: {{user.isAdmin}}</h4>
         <div class="actions">
-          <button @click="emitRemoveToy(toy._id)">Delete</button>
+          <button @click="removeUser(user._id)">Delete</button>
           <router-link :to="editUrl">Edit</router-link>
         </div>
       </div>
@@ -20,38 +19,38 @@
 export default {
    data() {
       return {
-          toy: {
-            name: '',
-            price: 0,
-            type: '',
-            inStock: true,
-            imgSrc: ''
+          user: {
+              _id: '',
+              name: '',
+              gender: {type: '', display: ''},
+              time: {hours: '', minutes: '', AMPM: ''},
+              color: '',
+              email: null,
+              isAdmin: false
           }
       }
   },
   created() {
-      const toyId = this.$route.params.toyId;
-      this.$store.dispatch({type: 'loadToys'})
+      const userId = this.$route.params.userId;
+      this.$store.dispatch({type: 'loadUsers'})
       .then (() => {
-        if (toyId) this.toy = JSON.parse(JSON.stringify(this.$store.getters.toyById(toyId)));
-        else this.$router.push('/toy');
+        if (userId) this.user = JSON.parse(JSON.stringify(this.$store.getters.userById(userId)));
+        else this.$router.push('/user');
       })
       
   },
 
   computed: {
-    inStockToDisplay() {
-      return (this.toy.inStock)? 'in Stock': 'Currently Not In Stock';
-    }, 
-
     editUrl() {
-      return `/edit/${this.toy._id}`;
+      return `/user/edit/${this.user._id}`;
     },
   },
 
   methods: {
-    emitRemoveToy(toyId) {
-      this.$emit('removeToy', toyId);
+    removeUser(userId) {
+      this.$store.dispatch({type: 'removeUser', userId}).then(() => {
+        this.$router.push('/user');
+      })
     }
   }
 }

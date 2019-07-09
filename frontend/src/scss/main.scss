@@ -35,6 +35,24 @@ button {
   font-family: inherit;
 }
 
+button {
+  background-color: transparent;
+  border: 1px solid #f34573;
+  border-radius: 7px;
+  outline: none;
+  color: inherit;
+  font-size: 1rem;
+  margin: 0 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 12px -1px #afa7a7;
+}
+
+button:hover,
+a:hover {
+  color: #f34573;
+}
+
 .showChatBtn {
   position: fixed;
   z-index: 1;
@@ -135,9 +153,19 @@ nav {
     color: #f34573;
   }
 
-  button {
+  button, a {
     background-color: #afa7a7;
   }
+
+  a {
+    border: 1px solid #f34573;
+    border-radius: 7px;
+    margin: 0 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 12px -1px #afa7a7;
+  }
+
 }
 
 #app > header {
@@ -160,6 +188,29 @@ nav {
 
   a {
     margin-left: 20px;
+  }
+}
+
+.user-preview {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  padding: 5px 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  border-radius: 10px;
+  max-width: max-content;
+  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
+  color: #2c3e50;
+  background-color: #d7f7f5;
+  
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -203,27 +254,11 @@ nav {
 }
 
 .toy-preview button,
-.toy-details button {
+.toy-details button,
+.user-preview button,
+.user-details button {
   border: none;
   box-shadow: none;
-}
-
-button {
-  background-color: transparent;
-  border: 1px solid #f34573;
-  border-radius: 7px;
-  outline: none;
-  color: inherit;
-  font-size: 1rem;
-  margin: 0 3px;
-  padding: 5px 10px;
-  cursor: pointer;
-  box-shadow: 3px 3px 12px -1px #afa7a7;
-}
-
-button:hover,
-a:hover {
-  color: #f34573;
 }
 
 .notInStock button:hover,

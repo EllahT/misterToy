@@ -30,7 +30,7 @@
           <input v-if="isFileUpload" @change="uploadImage" type="file"/>
         </div>
       </div>
-      <button>Save</button>
+      <button>{{btnText}}</button>
     </form>
   </div>
 </template>
@@ -62,6 +62,10 @@ export default {
   computed: {
       types() {
           return this.$store.getters.toyTypes;
+      },
+    
+      btnText() {
+          return (this.toy._id)? 'Save' : 'Add';
       }
   },
 

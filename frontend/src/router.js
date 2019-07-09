@@ -23,12 +23,12 @@ export default new Router({
       component: UsersList
     },
     {
-      path: '/user/:userId',
-      component: UserDetails
-    },
-    {
       path: '/user/edit/:userId?',
       component: EditUser
+    },
+    {
+      path: '/user/:userId',
+      component: UserDetails
     },
     {
       path: '/statistics',

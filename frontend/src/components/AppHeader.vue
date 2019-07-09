@@ -2,8 +2,7 @@
   <header>
     <div>
       <h2>Mister Toy</h2>
-      <h6 v-if="Object.keys(loggedUser).lenght">Welcome {{loggedUser}}</h6>
-      <button v-if="Object.keys(loggedUser).lenght" @click="logout">Logout</button>
+      <h4 v-if="loggedUser">Welcome {{loggedUser.name}}</h4>
     </div>
       <nav>
         <router-link to="/">Home</router-link> |
@@ -12,6 +11,7 @@
         <router-link to="/stores">Stores</router-link> |
         <router-link to="/toy">Toys</router-link> 
     </nav>
+    <button v-if="loggedUser" @click="logout">Logout</button>
   </header>
 </template>
 

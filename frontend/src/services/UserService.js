@@ -5,6 +5,7 @@ export default {
     getById,
     add,
     update,
+    remove,
     login,
     logout,
     getPreSetColors,
@@ -19,20 +20,24 @@ function getById(userId) {
     return HttpService.ajax(`user/${userId}`);
 }
 
-function add(userData) {
-    return HttpService.ajax('user','post',userData);
+function add(user) {
+    return HttpService.ajax('user','post',user);
 }
 
-function update(userData) {
-    return HttpService.ajax(`user/${userData._id}`,'put',userData);
+function update(user) {
+    return HttpService.ajax(`user/${user._id}`,'put',user);
 }
 
-function login(username) {
-    return HttpService.ajax(`user/signin`,'post',username);
+function remove(userId) {
+    return HttpService.ajax(`user/${userId}`, 'delete');
+}
+
+function login(email) {
+    return HttpService.ajax(`user/login`,'post',{email});
 }
 
 function logout() {
-    return HttpService.ajax('user.logout','post');
+    return HttpService.ajax('user/logout','post');
 }
 
 function getPreSetColors() {

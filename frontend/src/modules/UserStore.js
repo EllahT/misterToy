@@ -5,7 +5,7 @@ export default {
 
   state: {
     users: [],
-    loggedUser: {},
+    loggedUser: null,
     genders: [
       {
         type: "female",
@@ -55,12 +55,21 @@ export default {
     },
 
     clearLoggedUser(state) {
-      state.loggedUser = {};
+      state.loggedUser = null;
     },
 
     updateUser(state, {updatedUser}) {
       const idx = state.users.findIndex(user => user._id === updatedUser._id);
       state.users.splice(idx, 1, updatedUser);
+    },
+
+    addUser(state, {addedUser}) {
+      state.users.push(addedUser);
+    },
+
+    removeUser(state, {userId}) {
+      const idx = state.users.findIndex(user => user._id === userId);
+      state.users.splice(idx, 1);
     },
 
     setColors(state, { colors }) {
@@ -77,8 +86,8 @@ export default {
       });
     },
 
-    loginUser(context, {username}) {
-      return UserService.login(username).then((user) => {
+    loginUser(context, {email}) {
+      return UserService.login(email).then((user) => {
         context.commit({type: 'setLoggedUser', user});
         return user;
       })
@@ -91,22 +100,36 @@ export default {
       })
     },
 
-    updateUserData(context, { userData }) {
-      return UserService.update(userData).then(() => {
-        context.commit({ type: "updateUser", userData });
-        return userData;
+    updateUser(context, { user }) {
+      return UserService.update(user).then((updatedUser) => {
+        context.commit({ type: 'updateUser', updatedUser });
+        return updatedUser;
       });
+    },
+
+    addUser(context, {user}) {
+      return UserService.add(user).then((addedUser) => {
+        context.commit({type: 'addUser', addedUser});
+        return addedUser;
+      })
+    },
+
+    removeUser(context, {userId}) {
+      return UserService.remove(userId).then(() => {
+        context.commit({type: 'removeUser', userId});
+        return {};
+      })
     },
 
     loadColors(context) {
       UserService.getPreSetColors().then(colors => {
-        context.commit({ type: "setColors", colors });
+        context.commit({ type: 'setColors', colors });
       });
     },
 
     changeColors(context) {
       UserService.changeColors().then(colors => {
-        context.commit({ type: "setColors", colors });
+        context.commit({ type: 'setColors', colors });
       });
     }
   }
