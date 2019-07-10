@@ -8,7 +8,6 @@
       <ul ref="msgsList">
         <li v-for="(chat, i) in chats" :key="i">{{chat.from}}: {{chat.txt}}</li>
       </ul>
-
       <input type="text" v-model="txt" @change="sendMsg" />
     </div>
     <footer>
@@ -61,6 +60,10 @@ export default {
         this.socket.emit('chat msg', msg);
         this.txt = "";
     }
+  },
+
+  destroyed() {
+    this.chats = [];
   }
 };
 </script>

@@ -78,6 +78,14 @@ export default {
   },
 
   actions: {
+    loadLoggedUser(context) {
+      return UserService.getLoggedUser()
+      .then((user) => {
+        context.commit({type: 'setLoggedUser', user});
+        return user;
+      })
+    },
+
     loadUsers(context) {
       return UserService.query()
         .then(users => {

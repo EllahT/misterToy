@@ -22,6 +22,10 @@ export default {
     }
   },
 
+  created() {
+    this.$store.dispatch({type: 'loadLoggedUser'})
+  },
+
   computed: {
     loggedUser() {
       return this.$store.getters.loggedUser;

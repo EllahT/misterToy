@@ -8,6 +8,7 @@ export default {
     remove,
     login,
     logout,
+    getLoggedUser,
     getPreSetColors,
     changeColors
 }
@@ -38,6 +39,10 @@ function login(email) {
 
 function logout() {
     return HttpService.ajax('user/logout','post');
+}
+
+function getLoggedUser() {
+    return HttpService.ajax('user/logged');
 }
 
 function getPreSetColors() {
