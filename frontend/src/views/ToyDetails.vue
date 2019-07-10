@@ -1,5 +1,5 @@
 <template>
-  <div class="toy-details">
+  <div class="toy-details" @keydown.escape.stop="toggleShowChat">
       <h1>{{toy.name}}</h1>
       <img :src="toy.imgSrc"/>
       <div class="details-container">
@@ -10,23 +10,32 @@
         <div class="actions">
           <button @click="removeToy(toy._id)">Delete</button>
           <router-link :to="editUrl">Edit</router-link>
+          <button class="showChatBtn" @click="toggleShowChat">💬</button>
         </div>
       </div>
+       <toy-chat @close="toggleShowChat" v-if="showChat" :toyId="toy._id">
+        <h1 slot="box-header">Toy Chat For {{toy.name}}</h1>
+        <div></div>
+        <h6 slot="box-footer">Toy Chat</h6>
+      </toy-chat>
     </div>
 </template>
 
 <script>
+import ToyChat from '@/components/ToyChat.vue';
 
 export default {
    data() {
       return {
           toy: {
+            _id: null,
             name: '',
             price: 0,
             type: '',
             inStock: true,
             imgSrc: ''
-          }
+          },
+          showChat: false
       }
   },
   created() {
@@ -54,7 +63,15 @@ export default {
       this.$store.dispatch({type: 'removeToy', toyId}).then(() => {
         this.$router.push('/toy');
       })
+    },
+
+    toggleShowChat() {
+      this.showChat = !this.showChat;
     }
+  },
+
+  components: {
+    ToyChat
   }
 }
 </script>
