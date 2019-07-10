@@ -50,6 +50,6 @@ function getPreSetColors() {
 }
 
 function changeColors() {
-    return HttpService.ajax('/color/new');
+    return HttpService.ajax('color/new');
 }
 
