@@ -10,7 +10,6 @@
           <button @click="removeUser(user._id)">Delete</button>
           <router-link :to="editUrl">Edit</router-link>
         </div>
-      </div>
     </div>
 </template>
 

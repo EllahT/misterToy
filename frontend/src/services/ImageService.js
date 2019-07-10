@@ -12,7 +12,6 @@ function getRandomImg() {
 }
 
 async function uploadImg(ev) {
-    console.log(ev.target.files[0])
     const form = new FormData()
     form.append('imgUpload', ev.target.files[0])
     const img = await HttpService.ajax(`${BASE_URL}upload/cloudinary`,'post',form);
